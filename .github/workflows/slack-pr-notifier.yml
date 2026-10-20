@@ -131,7 +131,13 @@ jobs:
             }
 
             const payload = {
-                blocks: [richText(...elements)]
+                blocks: [
+                    header,
+                    {
+                        type: "rich_text",
+                        elements: [commitList]
+                    }
+                ]
             };
 
             core.setOutput("payload", JSON.stringify(payload));
