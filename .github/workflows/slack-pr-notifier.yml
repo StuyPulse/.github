@@ -45,7 +45,6 @@ jobs:
             });
 
             const bold = (value) => text(value, { bold: true });
-            const code = (value) => text(value, { code: true });
 
             const link = (url, label) => ({
                 type: "link",
@@ -98,19 +97,13 @@ jobs:
                 return section(...elements);
             };
 
-            const header = section(
-                text("✅ Branch "),
-                code(pr.base.ref),
-                text(" <- "),
-                code(pr.head.ref),
-                text(" merged for "),
-                code(fullRepoName),
-                text(" ("),
-                link(pr.html_url, `#${pr.number}`),
-                text(").\n"),
-                bold(`${commits.length} ${addPlural("commit", commits.length)} merged`),
-                text(":")
-            );
+            const header = {
+                type: "section",
+                text: {
+                    type: "mrkdwn",
+                    text: `:white_check_mark: Branch \`${pr.base.ref}\` <- \`${pr.head.ref}\` merged for \`${fullRepoName}\` (<${pr.html_url}|#${pr.number}>).\n*${commits.length} ${addPlural("commit", commits.length)} merged:*`
+                }
+            }
 
             const commitList = (() => {
                 if (commits.length === 0) {
