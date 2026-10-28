@@ -4,6 +4,7 @@
     <p>Stuyvesant High School's FIRST Robotics team.</p>
 </div>
 
+<a href="https://stuypulse.com/"><img src="./logos/globe.svg" alt="StuyPulse Website" height="30"/></a>
 <a href="https://www.thebluealliance.com/team/694"><img src="./logos/tba_lamp.svg" alt="The Blue Alliance" height="30"/></a>
 <a href="https://www.facebook.com/stuypulse"><img src="./logos/facebook.svg" alt="Facebook" height="30"/></a>
 <a href="https://www.instagram.com/stuypulse"><img src="./logos/instagram.svg" alt="Instagram" height="30"/></a>
