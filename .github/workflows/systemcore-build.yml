@@ -28,7 +28,7 @@ jobs:
         run: ./gradlew build
 
       - name: Notify Slack
-        if: always()
+        if: failure()
         uses: slackapi/slack-github-action@v2.1.1
         with:
           webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
