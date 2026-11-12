@@ -35,10 +35,14 @@ jobs:
         id: last-conclusion
         with:
           script: |
+            const workflowFile = process.env.GITHUB_WORKFLOW_REF
+              .split("/.github/workflows/")[1]
+              .split("@")[0];
+
             const { data } = await github.rest.actions.listWorkflowRuns({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              workflow_id: context.workflowId,
+              workflow_id: workflowFile,
               per_page: 5,
             });
 
