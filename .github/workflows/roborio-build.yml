@@ -36,16 +36,26 @@ jobs:
               .split("/.github/workflows/")[1]
               .split("@")[0];
 
+            const branch = process.env.GITHUB_HEAD_REF || process.env.GITHUB_REF_NAME;
+
+            console.log("Using workflow file: ", workflowFile);
+            console.log("Using branch: ", branch);
+
             const { data } = await github.rest.actions.listWorkflowRuns({
               owner: context.repo.owner,
               repo: context.repo.repo,
               workflow_id: workflowFile,
+              branch,
               per_page: 5,
             });
+
+            console.log("Workflow runs data fetch result: ", data);
 
             const previousRuns = data.workflow_runs.filter((run) => {
               return run.id !== context.runId;
             });
+
+            console.log("Filtered workflow runs for previous runs: ", previousRuns);
 
             if (previousRuns.length < 1) {
               core.setOutput("last-conclusion", "nada");
@@ -53,6 +63,7 @@ jobs:
             }
 
             const lastConclusion = previousRuns[0].conclusion;
+            console.log("Last conclusion: ", lastConclusion);
             core.setOutput("last-conclusion", lastConclusion);
 
       - name: Notify Slack
